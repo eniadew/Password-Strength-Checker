@@ -5,22 +5,39 @@ npm install prompt-sync
 
 Run the script with Node:
 
-```
+```bash
 node main.js
 ```
 
-The script will prompt you to type a password and then validate it against a set of rules. It prints `Good Password!` when all checks pass, otherwise it prints `Error! Bad Password!` and lists which rules failed.
+The script will prompt:
+
+```
+Enter a password:
+```
+
+After you enter a password it will either print:
+
+```
+Good Password!
+```
+
+or
+
+```
+Error! Bad Password!
+<one or more suggestions>
+```
 
 ## Password rules
 
-The checker enforces the following rules:
+The checker validates the password against these rules:
 
-- At least one uppercase letter (A-Z)
-- At least one number (0-9)
-- At least one symbol (common punctuation characters)
+- At least one uppercase letter (A–Z)
+- At least one digit (0–9)
+- At least one symbol (common punctuation)
 - Minimum length of 8 characters
 
-You can edit `main.js` if you want to change the symbol set or adjust any rule.
+If a rule is not met, the script prints a clear message telling you which rule(s) failed.
 
 ## Examples
 
@@ -42,10 +59,26 @@ Please add a symbol
 Password must be more than 8 characters
 ```
 
+## Customization
+
+- To change which symbols are allowed or required, edit the regular expression in `main.js`.
+- To change the minimum length, adjust the length check in `main.js`.
+- If you want to add more rules (e.g., lowercase requirement, blacklist common passwords, entropy checks), add the logic to `main.js` or refactor into a rules array.
+
 ## Notes
 
-- This is a small educational script. For production systems consider more robust policies (password blacklists, entropy checks, rate limiting, using libraries such as zxcvbn, etc.).
-- The symbol check uses a broad set of punctuation; modify the regular expression in `main.js` if you need to allow or disallow specific characters.
+- This script is intended as a simple educational tool. For production-grade password validation consider:
+  - Using a well-tested library (e.g., `zxcvbn`) for strength estimation.
+  - Checking against common-password lists.
+  - Enforcing server-side validation and rate limiting.
+- Symbols checked by the script include common punctuation characters. Modify the regex if you need a tighter or broader symbol set.
+
+## Contributing
+
+Small projects like this can be improved by:
+- Adding unit tests.
+- Refactoring checks into a configurable rules array.
+- Improving messages and localization.
 
 ## License
 
